@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./models/user');
 
-const connString = 'mongodb://FarkhodPC:27019/trans'; // ozimnikini qoyaman
+const connString = 'mongodb://localhost:27017/trans'; // ozimnikini qoyaman
 async function initDatabase() {
 
     // bazaga ulanamiz
@@ -12,8 +12,8 @@ await mongoose.connect(connString, {
     useUnifiedTopology: true
 });
 
-const senderAccountNumber = '' // ozimnikini qoyaman
-const receiverAccountNumber = '' // ozimnikini qoyaman
+const senderAccountNumber = '27018' // ozimnikini qoyaman
+const receiverAccountNumber = '27019' // ozimnikini qoyaman
 
 // jonatuvchini hisob raqami boyicha bazada qidirib topamiz
 
