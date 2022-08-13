@@ -13,9 +13,22 @@ const app = express();
 const winston = require('winston');
 require('winston-mongodb');
 
+
 winston.add(new winston.transports.Console());
 winston.add(new winston.transports.File({filename: 'logs/vd-logs.log', level: 'error'}));
 winston.add(new winston.transports.MongoDB({db: 'mongodb://localhost/virtualDars-logs', level: 'info'})); // level error kodi , faqat error leveldagi xatolarni chiqaradi
+
+winston.exceptions.handle(new winston.transports.File({filename: 'logs/vd-logs.log', level: 'error'})); // winston varianti
+
+process.on('unhandledRejection', ex => { // procces varianti
+    throw ex;
+});
+
+const myPromis = Promise.reject('yana boshqa bir xato').then('gul');
+
+
+
+throw new Error('KUTILMAGAN  xato');
 
 
 if(!config.get('jwtPrivateKey')){

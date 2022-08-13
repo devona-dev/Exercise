@@ -8,6 +8,7 @@ const auth = require('../middleware/auth');
 
 
 router.get('/', async (req, res) => {
+    // throw new Error('olishda xatolik');
     const categories = await Category.find().sort('name');
     res.send(categories);
 });
