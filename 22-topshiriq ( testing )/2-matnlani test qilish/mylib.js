@@ -1,3 +1,4 @@
+const db = require('./db');
 // sonlarni testlash
 module.exports.absolute = function(number) {
     return (number >= 0) ? number : -number;
@@ -25,15 +26,19 @@ module.exports.registerUser = function(userName){
     return {id: 111, userName: userName};
 }
 
-// mashgulto 
+// mashgulot
 module.exports.fizzBuzz = function (input) {
     if(typeof input !== 'number') throw new Error('input son bolishi kerak');
     if((input % 3 === 0) && (input % 5) === 0) return 'FizzBuzz';
     if(input % 3 === 0) return 'Fizz';
     if(input % 5 === 0) return 'Buzz';
     
-
-
     return input;
+}
+//  Mock funksiyalar haqida 
 
+module.exports.applyDiscount = function(order){
+    const customer = db.getCustomer(order.customerId);
+    if(customer.points > 100 )
+        order.totalPrice = order.price - (order.price * 0.1);
 }

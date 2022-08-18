@@ -1,4 +1,5 @@
 const myLib = require('../mylib');
+const db = require('../db')
 
 describe('absolut', () => {
     it('Beriladigan son musbat bolsa qaytadigan son musbat', () => {
@@ -100,4 +101,28 @@ describe('fizzBuzz', ()=>{
         const result = myLib.fizzBuzz(2);
         expect(result).toBe(2)
     })
+})
+
+describe('applyDiscount', ()=>{
+    it('Agar customerda 100 dan kop pointlar bolsa 10% chegirma beriladi.', ()=>{
+        db.getCustomer = function(customerId){
+            console.log('Mijozni olishni mock qildik');
+            return { id: customerId, points: 101 }
+        }
+
+        const order = {id: 7, price: 100, totalPrice: 100 };
+        myLib.applyDiscount(order);
+        expect(order.totalPrice).toBe(90);  
+    });
+
+    it('Agar customerda 100 dan kam pointlar bolsa', ()=>{
+        db.getCustomer = function(customerId){
+            console.log('Mijozni olishni mock qildik');
+            return { id: customerId, points: 55 }
+        }
+        
+        const order = {id: 7, price: 100, totalPrice: 100 };
+        myLib.applyDiscount(order);
+        expect(order.totalPrice).toBe(100);  
+    });
 })
